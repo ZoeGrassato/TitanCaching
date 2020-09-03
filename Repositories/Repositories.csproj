@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Cache\" />
     <Folder Include="ExpiryDate\" />
     <Folder Include="Serialization\" />
     <Folder Include="Prefix\" />
