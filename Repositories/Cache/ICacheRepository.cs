@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Cache
+namespace Repositories.Cache
 {
-    public interface ICacheService
+    public interface ICacheRepository
     {
         /// <summary>
-        /// Forwards an item to the repo layer in order to add it
+        /// Add an item into the db table
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
         void AddItem<T>(T item);
 
         /// <summary>
-        /// updates a serialized item then forwards it to the repo layer in the correct form
+        /// Inserts an updated serialized item back into the db table
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item">the item to update</param>
@@ -22,7 +22,7 @@ namespace Services.Cache
         void UpdateItem<T>(T item, Guid itemId);
 
         /// <summary>
-        /// Gets all items
+        /// Gets all items from the db table, filterable based on an id
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="itemId"></param>
