@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repositories.Cache.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,7 +12,7 @@ namespace Repositories.Cache
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
-        void AddItem<T>(T item);
+        void AddItem(CacheItemAccessObj item);
 
         /// <summary>
         /// Inserts an updated serialized item back into the db table
@@ -19,7 +20,7 @@ namespace Repositories.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="item">the item to update</param>
         /// <param name="itemId">the itemId of the item that needs to be updated</param>
-        void UpdateItem<T>(T item, Guid itemId);
+        void UpdateItem(UpdateCacheItemAccessObj item);
 
         /// <summary>
         /// Gets all items from the db table, filterable based on an id
@@ -27,6 +28,6 @@ namespace Repositories.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        List<T> GetAll<T>(Guid itemId);
+        List<CacheItemAccessObj> GetAll(Guid itemId);
     }
 }
