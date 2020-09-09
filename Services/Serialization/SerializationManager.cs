@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Services.Cache;
+using Services.Serialization.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,51 @@ namespace Services.Serialization
 {
     public class SerializationManager : ISerializationManager
     {
+        private ICacheService _cacheService;
+        public SerializationManager(ICacheService cacheService)
+        {
+            _cacheService = cacheService;
+        }
+        public ViewJsonDataProperties RetrieveProperties(byte[] jsonList)
+        {
+            var item = Decompress(jsonList);
+            var finalList = DeserializeProperties(item);
+            var jsonArray = JArray.Parse(item);
+            var model = new ViewJsonDataProperties { Items = finalList, TotalCountOfItems = jsonArray.Count };
+            return model;
+        }
+
+        public JsonItems RetrieveJsonObject(int itemNumber, byte[] jsonList, int propsCount)
+        {
+            var item = Decompress(jsonList);
+            var finalDictionairy = DeserializeSingleObjectItem(item, itemNumber, propsCount);
+            var final = new JsonItems() { ItemNumber = itemNumber, Items = finalDictionairy };
+            return final;
+        }
+
+        public void UpdateJsonObject(EditJsonItem model)
+        {
+            var byteCode = _cacheService.GetAll(model.CacheKey).SingleOrDefault(x => x.Key == model.CacheKey).Value; //REFACTOR LATER !!!!!
+            var decompressed = Decompress(byteCode);
+            var allItems = DeserializeWholeObject(decompressed, model.JsonPropCount);
+            var editedItems = EditJson(model, allItems);
+
+            var serializedItems = Serialize(editedItems);
+            var compressedItems = Compress(serializedItems);
+            _cacheService.UpdateValueBytes(model.CacheKey, compressedItems);
+        }
+
+        public List<Dictionary<string, string>> EditJson(EditJsonItem model, List<Dictionary<string, string>> items)
+        {
+            var currentItem = items[model.CacheItemNumber];
+            foreach (var current in model.Items)
+            {
+                var jsonCurrent = currentItem.SingleOrDefault(x => x.Key == current.Key);
+                currentItem[jsonCurrent.Key] = current.Value;
+            }
+            return items;
+        }
+
         //this is used when we need to deserialize json into a complete, whole form
         public List<Dictionary<string, string>> DeserializeWholeObject(string decompressedValue, int propsCount)
         {
@@ -62,18 +109,6 @@ namespace Services.Serialization
         {
             byte[] gzBuffer = compressedText;
 
-            using (var compressedStream = new MemoryStream(gzBuffer))
-            using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
-            using (var resultStream = new MemoryStream())
-            {
-                zipStream.CopyTo(resultStream);
-                return Encoding.UTF8.GetString(resultStream.ToArray());
-            }
-        }
-
-        public string Decompress(byte[] compressedText)
-        {
-            byte[] gzBuffer = compressedText;
             using (var compressedStream = new MemoryStream(gzBuffer))
             using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
             using (var resultStream = new MemoryStream())

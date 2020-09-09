@@ -28,6 +28,6 @@ namespace Repositories.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        List<CacheItemAccessObj> GetAll(Guid itemId = default(Guid));
+        List<CacheItemAccessObj> GetAll(string itemId = "");
     }
 }

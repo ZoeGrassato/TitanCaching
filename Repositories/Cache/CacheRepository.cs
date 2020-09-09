@@ -36,7 +36,7 @@ namespace Repositories.Cache
                 }
             }
         }
-        public List<CacheItemAccessObj> GetAll(Guid itemId = default(Guid))
+        public List<CacheItemAccessObj> GetAll(string itemId = "")
         {
             string sqlQuery = "SELECT * FROM dbo.CacheItems";
             var cacheItems = new List<CacheItemAccessObj>();

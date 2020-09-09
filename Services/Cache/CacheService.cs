@@ -23,7 +23,7 @@ namespace Services.Cache
             var mapped = _accessObjectMapper.MapToAccessCacheItem(item);
             _dbConnection.AddItem(mapped);
         }
-        public List<CacheItem> GetAll(Guid itemId = default(Guid))
+        public List<CacheItem> GetAll(string itemId = "")
         {
             var final = new List<CacheItem>();
 

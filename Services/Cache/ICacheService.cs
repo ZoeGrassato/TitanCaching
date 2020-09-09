@@ -28,6 +28,6 @@ namespace Services.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        List<CacheItem> GetAll(Guid itemId = default(Guid));
+        List<CacheItem> GetAll(string itemId = "");
     }
 }

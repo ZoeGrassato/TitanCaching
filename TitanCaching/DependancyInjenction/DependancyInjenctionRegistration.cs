@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Repositories.Cache;
 using Services.Cache;
+using Services.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace TitanCaching.DependancyInjenction
         {
             services.AddTransient<ICacheService, CacheService>();
             services.AddTransient<ICacheRepository, CacheRepository>();
+            services.AddTransient<ISerializationManager, SerializationManager>();
         }
     }
 }
