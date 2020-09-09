@@ -36,7 +36,7 @@ namespace Repositories.Cache
                 }
             }
         }
-        public List<CacheItemAccessObj> GetAll(Guid itemId)
+        public List<CacheItemAccessObj> GetAll(Guid itemId = default(Guid))
         {
             string sqlQuery = "SELECT * FROM dbo.CacheItems";
             var cacheItems = new List<CacheItemAccessObj>();
@@ -56,13 +56,14 @@ namespace Repositories.Cache
         }
         public void UpdateItem(UpdateCacheItemAccessObj item)
         {
-            string sqlQuery = "UPDATE dbo.CacheItems SET key = @Key, value = @Value WHERE key = @Key";
+            string sqlQuery = "UPDATE dbo.CacheItems SET key = @Key, value = @Value WHERE key = @OldKey";
             using (var connection = new SqlConnection(_connectionString))
             {
                 try
                 {
                     var affectedRows = connection.Execute(sqlQuery, new
                     {
+                        OldKey = item.OldKey,
                         Key = item.Key,
                         Value = item.Value
                     });

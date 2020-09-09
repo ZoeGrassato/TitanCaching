@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Repositories.ExpiryDate.Models
 {
-    public class CacheItemExpirationAccessObj
+    public class UpdateExpiryDateAccessObj
     {
         public string Key { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
     }
 }

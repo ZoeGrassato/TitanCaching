@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repositories.ExpiryDate.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,7 +12,7 @@ namespace Repositories.ExpiryDate
         /// </summary>
         /// <param name="itemId"></param>
         /// <param name="expirationDate"></param>
-        void UpdateExpiry(Guid itemId, DateTime expirationDate);
+        void UpdateExpiry(UpdateExpiryDateAccessObj updateExpiryDateItem);
 
         /// <summary>
         /// Gets all expiry date objects from the db table
@@ -19,6 +20,6 @@ namespace Repositories.ExpiryDate
         /// <typeparam name="T"></typeparam>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        List<T> GetAll<T>(Guid itemId);
+        List<CacheItemExpirationAccessObj> GetAll(Guid itemId);
     }
 }

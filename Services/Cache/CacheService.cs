@@ -7,19 +7,28 @@ using System.Text;
 
 namespace Services.Cache
 {
+    //SERVICE LAYER -> this layer handles all data preparation and work that needs to happen in order for objects to go to the REPO layer
     public class CacheService : ICacheService
     {
-        private CacheRepository _dbConnection = new CacheRepository("");
+        private ICacheRepository _dbConnection;
         private AccessObjectMapper _accessObjectMapper = new AccessObjectMapper();
+        private TransferObjectMapper _transferObjectMapper = new TransferObjectMapper();
+
+        public CacheService(ICacheRepository cacheRepository)
+        {
+            _dbConnection = cacheRepository;
+        }
         public void AddItem(CacheItem item)
         {
             var mapped = _accessObjectMapper.MapToAccessCacheItem(item);
             _dbConnection.AddItem(mapped);
         }
-        public List<CacheItem> GetAll(Guid itemId)
+        public List<CacheItem> GetAll(Guid itemId = default(Guid))
         {
             var final = new List<CacheItem>();
-            final = _dbConnection.GetAll(Guid.Empty);
+
+            var unmappedItems = _dbConnection.GetAll();
+            var mappedItems = _transferObjectMapper.MapToTransferCacheItems(unmappedItems);
 
             return final;
         }

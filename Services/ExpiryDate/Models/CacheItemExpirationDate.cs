@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Repositories.ExpiryDate.Models
+namespace Services.ExpiryDate.Models
 {
-    public class CacheItemExpirationAccessObj
+    public class CacheItemExpirationDate
     {
         public string Key { get; set; }
         public DateTime ExpirationDate { get; set; }
