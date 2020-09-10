@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Serialization
 {
-    public interface ISerializationManager
+    public interface ISerializationService
     {
         string Decompress(byte[] compressedText);
         byte[] Compress(string item);

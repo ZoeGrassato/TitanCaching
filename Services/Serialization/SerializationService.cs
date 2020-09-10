@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Repositories.Cache;
+using Repositories.Cache.Models;
 using Services.Cache;
 using Services.Serialization.Models;
 using System;
@@ -11,12 +13,15 @@ using System.Text;
 
 namespace Services.Serialization
 {
-    public class SerializationManager : ISerializationManager
+    //this class deals with all serialzation needed to edit and store json as binary in the db
+    public class SerializationService : ISerializationService
     {
         private ICacheService _cacheService;
-        public SerializationManager(ICacheService cacheService)
+        private ICacheRepository _cacheRepository;
+        public SerializationService(ICacheService cacheService, ICacheRepository cacheRepository)
         {
             _cacheService = cacheService;
+            _cacheRepository = cacheRepository;
         }
         public ViewJsonDataProperties RetrieveProperties(byte[] jsonList)
         {
@@ -37,6 +42,7 @@ namespace Services.Serialization
 
         public void UpdateJsonObject(EditJsonItem model)
         {
+            var final = new UpdateCacheItemAccessObj();
             var byteCode = _cacheService.GetAll(model.CacheKey).SingleOrDefault(x => x.Key == model.CacheKey).Value; //REFACTOR LATER !!!!!
             var decompressed = Decompress(byteCode);
             var allItems = DeserializeWholeObject(decompressed, model.JsonPropCount);
@@ -44,7 +50,9 @@ namespace Services.Serialization
 
             var serializedItems = Serialize(editedItems);
             var compressedItems = Compress(serializedItems);
-            _cacheService.UpdateValueBytes(model.CacheKey, compressedItems);
+            final.Key = model.CacheKey;
+            final.Value = compressedItems;
+            _cacheRepository.UpdateBytesValue(final);
         }
 
         public List<Dictionary<string, string>> EditJson(EditJsonItem model, List<Dictionary<string, string>> items)

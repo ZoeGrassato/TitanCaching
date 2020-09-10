@@ -15,7 +15,7 @@ namespace TitanCaching.DependancyInjenction
         {
             services.AddTransient<ICacheService, CacheService>();
             services.AddTransient<ICacheRepository, CacheRepository>();
-            services.AddTransient<ISerializationManager, SerializationManager>();
+            services.AddTransient<ISerializationService, SerializationService>();
         }
     }
 }

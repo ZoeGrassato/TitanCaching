@@ -74,5 +74,25 @@ namespace Repositories.Cache
                 }
             }
         }
+
+        public void UpdateBytesValue(UpdateCacheItemAccessObj item)
+        {
+            string sqlQuery = "UPDATE dbo.CacheItems SET value = @Value WHERE key = @Key";
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    var affectedRows = connection.Execute(sqlQuery, new
+                    {
+                        Key = item.Key,
+                        Value = item.Value
+                    });
+                }
+                catch (Exception ex)
+                {
+                    throw new GeneralDatabaseException("A Db related error occured when trying to run your query", ex);
+                }
+            }
+        }
     }
 }

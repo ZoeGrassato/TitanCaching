@@ -29,5 +29,12 @@ namespace Repositories.Cache
         /// <param name="itemId"></param>
         /// <returns></returns>
         List<CacheItemAccessObj> GetAll(string itemId = "");
+
+        /// <summary>
+        /// This is used to update/edit the byte code of serialized json and put it back into the db table
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="bytes"></param>
+        void UpdateBytesValue(UpdateCacheItemAccessObj item);
     }
 }
