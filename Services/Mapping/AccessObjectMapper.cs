@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Repositories.Cache.Models;
+using Repositories.ExpiryDate.Models;
 using Services.Cache.Models;
+using Services.ExpiryDate.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,6 +37,19 @@ namespace Services.Mapping
             IMapper mapper = config.CreateMapper();
             var source = cacheItem;
             var final = mapper.Map<UpdateCacheItem, UpdateCacheItemAccessObj>(source);
+            return final;
+        }
+
+        public UpdateExpiryDateAccessObj MapToAccessUpdateExpiryDate(UpdateExpiryDate cacheItem)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UpdateExpiryDate, UpdateExpiryDateAccessObj>();
+            });
+
+            IMapper mapper = config.CreateMapper();
+            var source = cacheItem;
+            var final = mapper.Map<UpdateExpiryDate, UpdateExpiryDateAccessObj>(source);
             return final;
         }
     }
