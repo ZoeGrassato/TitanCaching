@@ -9,6 +9,8 @@ using System.Text;
 
 namespace Services.Mapping
 {
+    //this class implements all mapping that is needed for data to be passed to the API layer
+    //mapping direction REPO Layer -> API Layer
     public class TransferObjectMapper
     {
         public List<CacheItem> MapToTransferCacheItems(List<CacheItemAccessObj> cacheItem)

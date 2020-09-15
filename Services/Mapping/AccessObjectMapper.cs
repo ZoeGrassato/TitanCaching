@@ -13,7 +13,6 @@ namespace Services.Mapping
     //mapping direction API layer -> REPO layer
     public class AccessObjectMapper
     {
-
         public CacheItemAccessObj MapToAccessCacheItem(CacheItem cacheItem)
         {
             var config = new MapperConfiguration(cfg =>

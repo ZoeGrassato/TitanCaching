@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitanCaching", "TitanCaching\TitanCaching.csproj", "{3F8679A3-760E-461D-9C07-6B1320E41FDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TitanCaching", "TitanCaching\TitanCaching.csproj", "{3F8679A3-760E-461D-9C07-6B1320E41FDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{947F8697-54B3-4641-B1AD-4C44F31F4890}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{947F8697-54B3-4641-B1AD-4C44F31F4890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{70F7CECF-BA29-4026-8568-70936CE66844}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{70F7CECF-BA29-4026-8568-70936CE66844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitanCaching.App", "TitanCaching.App\TitanCaching.App.csproj", "{935F079C-B769-40D1-A918-454915DB9D2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{70F7CECF-BA29-4026-8568-70936CE66844}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70F7CECF-BA29-4026-8568-70936CE66844}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70F7CECF-BA29-4026-8568-70936CE66844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{935F079C-B769-40D1-A918-454915DB9D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935F079C-B769-40D1-A918-454915DB9D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935F079C-B769-40D1-A918-454915DB9D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935F079C-B769-40D1-A918-454915DB9D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
