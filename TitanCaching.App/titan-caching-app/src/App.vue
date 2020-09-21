@@ -17,9 +17,20 @@
         </div>
       </div>
     </div>
+    <Footer></Footer>
     <router-view />
   </div>
 </template>
+
+<script>
+  import Footer from './components/Footer.vue'
+  export default {
+    name: 'App',
+    components: {
+      Footer
+    }
+  }
+</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
